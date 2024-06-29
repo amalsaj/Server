@@ -12,6 +12,8 @@ const login = async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
 
+    console.log(`Sign in Successfull with username:${username} and password:${password}`);
+
     if (user.password !== password) {
       return res.status(401).json({ message: "Incorrect password" });
     }
@@ -24,14 +26,10 @@ const login = async (req, res) => {
     } else {
       return res.status(404).json({ message: "User type not found" });
     }
-
-    // TOKEN GENERATOR
-    // generateTokensAndSetCookies(user._id, res);
-
     return res.status(200).json({ message, user });
   } catch (error) {
     console.error("Error:", error);
     return res.status(500).json({ message: "Internal server error" });
   }
 };
-module.exports=login
+module.exports = login;
